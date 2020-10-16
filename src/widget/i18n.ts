@@ -22,8 +22,8 @@ export const i18n: i18n = {
             'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
         button: 'Search',
         inputsPlaceholder: {
-            from: 'Depart date',
-            to: 'Return date',
+            from: '"Depart date"',
+            to: '"Return date"',
         },
     },
     RU: {
@@ -32,8 +32,8 @@ export const i18n: i18n = {
             'Давно установлено, что читатель будет отвлекаться на читабельное содержимое страницы при просмотре ее макета.',
         button: 'Поиск',
         inputsPlaceholder: {
-            from: 'Дата отправления',
-            to: 'Дата возвращения',
+            from: '"Дата отправления"',
+            to: '"Дата возвращения"',
         },
     },
 };

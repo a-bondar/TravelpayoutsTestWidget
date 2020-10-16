@@ -32,9 +32,9 @@ const getContainerSize = (container: HTMLElement): Size => {
     return 'xl';
 };
 
-const getMarkup = (size: Size, lang: Lang = 'EN') => {
+const getMarkup = (size: Size, lang: Lang = 'EN', widgetClassname: string) => {
     return `
-            <div class='${styles.wrapper} ${styles[`size_${size}`]}'>
+            <div class='${styles.wrapper} ${styles[`size_${size}`]} ${widgetClassname}'>
                 <h3 class=${styles.title}>${i18n[lang].title}</h3>
                    <div class=${styles['form-wrapper']}>
                         <p class=${styles.subtitle}>${i18n[lang].subtitle}</p>
@@ -62,10 +62,27 @@ const getMarkup = (size: Size, lang: Lang = 'EN') => {
         `;
 };
 
+const setWidgetStyle = (widget: HTMLElement, styleOptions: Omit<Options, 'lang'>) => {
+    Object.keys(styleOptions).forEach((property) => {
+        const value = styleOptions[property];
+
+        widget.style.setProperty(`--${property}`, value);
+    });
+};
+
 const render = (container: HTMLElement, { lang, ...restOptions }: Options) => {
     const containerSize = getContainerSize(container);
+    const widgetClassname = `tp-widget-${Date.now()}`;
 
-    container.innerHTML = getMarkup(containerSize, lang);
+    container.innerHTML = getMarkup(containerSize, lang, widgetClassname);
+
+    if (Object.keys(restOptions).length !== 0) {
+        const widgetColl = container.getElementsByClassName(widgetClassname) as HTMLCollectionOf<HTMLElement>;
+
+        if (widgetColl.length && widgetColl[0]) {
+            setWidgetStyle(widgetColl[0], restOptions);
+        }
+    }
 };
 
 export const app = (containerId: string, options: Options = {}) => {
