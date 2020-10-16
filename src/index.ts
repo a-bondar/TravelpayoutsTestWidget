@@ -1,1 +1,5 @@
-console.log('hello');
+import { app } from './widget'
+
+document.addEventListener('DOMContentLoaded', () => {
+    app();
+})

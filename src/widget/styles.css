@@ -1,0 +1,117 @@
+.wrapper {
+    --font-family: OpenSans, sans-serif;
+    --text-color: #fff;
+    --bg-color: #4a90e2;
+    --btn-bg-color: #f5a623;
+
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 1024px;
+    padding: 4px 20px 15px;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.title {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: normal;
+}
+.size_m .title, .size_s .title {
+    font-size: 18px;
+}
+.size_s .title {
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    width: 100%;
+    margin: 0 0 15px;
+    font-size: 10px;
+    font-weight: 600;
+
+}
+.size_xl .subtitle {
+    width: 28%;
+    margin: 0 30px 0 0;
+}
+.size_s .subtitle {
+    order: 1;
+    margin: 15px 0 0;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.size_xl .form-wrapper {
+    flex-direction: row;
+}
+
+.form {
+    display: flex;
+    flex-grow: 1;
+}
+.size_m .form {
+    flex-wrap: wrap;
+}
+.size_s .form {
+    flex-direction: column;
+}
+
+.input {
+    all: initial;
+    font-family: var(--font-family);
+    font-size: 14px;
+    padding: 0 11px 0;
+    border: 0;
+    width: 26%;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+.input:not(:last-of-type) {
+    margin-right: 20px;
+}
+.size_l .input {
+    width: 28%;
+}
+.size_m .input {
+    width: 42%;
+}
+.size_s .input {
+    width: auto;
+    margin: 0 0 15px;
+}
+
+.button {
+    all: initial;
+    height: 40px;
+    margin-left: 20px;
+    padding: 0 10px;
+    flex-grow: 1;
+    font-size: 20px;
+    line-height: 2;
+    letter-spacing: 1.11px;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    background-color: var(--btn-bg-color);
+    box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.size_l .button {
+    width: 31%;
+    margin-left: 28px;
+}
+.size_m .button {
+    width: 100%;
+    margin: 20px 0 0;
+}
+.size_s .button {
+    width: auto;
+    margin: 0;
+}
