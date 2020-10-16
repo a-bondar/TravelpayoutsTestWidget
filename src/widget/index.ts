@@ -1,6 +1,5 @@
 import styles from './styles.css';
 import { i18n, Lang } from './i18n';
-import { container } from 'webpack';
 
 type Size = 'xl' | 'l' | 'm' | 's';
 
@@ -11,9 +10,22 @@ type Options = {
     buttonColor?: string;
 };
 
-const getDefaultOptions = (window: Window): Options => ({
-    lang: (window.navigator.language as Lang) ?? 'EN',
-});
+const getDefaultOptions = (window: Window): Options => {
+    let lang = 'ru' as Lang;
+
+    if (window.navigator.language) {
+        const userLang = window.navigator.language.split('-')[0] as Lang;
+        const hasTranslate = i18n[userLang];
+
+        if (hasTranslate) {
+            lang = userLang;
+        }
+    }
+
+    return {
+        lang,
+    };
+};
 
 const getContainerSize = (container: HTMLElement): Size => {
     const width = container.offsetWidth;
@@ -33,7 +45,7 @@ const getContainerSize = (container: HTMLElement): Size => {
     return 'xl';
 };
 
-const getMarkup = (size: Size, lang: Lang = 'EN', widgetClassname: string) => {
+const getMarkup = (size: Size, lang: Lang = 'en', widgetClassname: string) => {
     return `
             <div class='${styles.wrapper} ${styles[`size_${size}`]} ${widgetClassname}'>
                 <h3 class=${styles.title}>${i18n[lang].title}</h3>
@@ -88,7 +100,7 @@ const render = (container: HTMLElement, { lang, ...restOptions }: Options) => {
 
 const initializedWidgetIds: Array<string> = [];
 
-export const app = (containerId: string, options: Options = {}) => {
+export const init = (containerId: string, options: Options = {}) => {
     if (!containerId) {
         throw new Error('containerId required');
     }

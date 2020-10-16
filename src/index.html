@@ -3,8 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Widget Test App</title>
+    <script>
+      (function() {
+        window.tpGlobalWidgetInitName = 'tpWidgetInit';
+        window.tpWidgetInit = window.tpWidgetInit || function() {
+          window.tpWidgetInit.queue = window.tpWidgetInit.queue || [];
+
+          window.tpWidgetInit.queue.push(arguments);
+        }
+        var scriptEl = document.createElement('script');
+        var firstScriptEl = document.getElementsByTagName('script')[0];
+
+        scriptEl.async = true;
+        scriptEl.src = './widget.bundle.js';
+
+        firstScriptEl.parentNode.insertBefore(scriptEl, firstScriptEl);
+      })();
+      ['XL', 'L', 'M', 'S'].forEach(function (size) {
+        return window.tpWidgetInit(`widget${size}`, { textColor: size === 'L' ?' red' : 'cyan' })
+      });
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1"></head>
   <body>
-    <div id="widget" style="max-width: 1024px"></div>
+    <h2>XL</h2>
+    <div id="widgetXL" style="max-width: 1024px"></div>
+    <br>
+    <h2>L</h2>
+    <div id="widgetL" style="max-width: 768px"></div>
+    <br>
+    <h2>M</h2>
+    <div id="widgetM" style="max-width: 440px"></div>
+    <br>
+    <h2>S</h2>
+    <div id="widgetS" style="max-width: 280px"></div>
+    <br>
   </body>
 </html>

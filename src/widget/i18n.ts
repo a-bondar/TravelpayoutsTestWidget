@@ -8,15 +8,15 @@ type TextContent = {
     };
 };
 
-export type Lang = 'EN' | 'RU';
+export type Lang = 'en' | 'ru';
 
 type i18n = {
-    EN: TextContent;
-    RU: TextContent;
+    en: TextContent;
+    ru: TextContent;
 };
 
 export const i18n: i18n = {
-    EN: {
+    en: {
         title: 'Where does it come from? Why do we use it?',
         subtitle:
             'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
@@ -26,7 +26,7 @@ export const i18n: i18n = {
             to: '"Return date"',
         },
     },
-    RU: {
+    ru: {
         title: 'Откуда он взялся? Почему мы его используем?',
         subtitle:
             'Давно установлено, что читатель будет отвлекаться на читабельное содержимое страницы при просмотре ее макета.',
