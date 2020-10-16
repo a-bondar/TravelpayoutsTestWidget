@@ -1,5 +1,5 @@
 import { app } from './widget';
 
 document.addEventListener('DOMContentLoaded', () => {
-    app();
+    app('widget', { lang: 'RU' });
 });
