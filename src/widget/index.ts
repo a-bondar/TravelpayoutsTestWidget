@@ -1,5 +1,6 @@
 import styles from './styles.css';
 import { i18n, Lang } from './i18n';
+import { container } from 'webpack';
 
 type Size = 'xl' | 'l' | 'm' | 's';
 
@@ -85,10 +86,26 @@ const render = (container: HTMLElement, { lang, ...restOptions }: Options) => {
     }
 };
 
+const initializedWidgetIds: Array<string> = [];
+
 export const app = (containerId: string, options: Options = {}) => {
-    // TODO - добавить обработку ошибок
-    const mergedOptions = { ...getDefaultOptions(window), ...options };
+    if (!containerId) {
+        throw new Error('containerId required');
+    }
+
+    if (initializedWidgetIds.includes(containerId)) {
+        console.warn(`widget with id "${containerId}" already initialized`);
+
+        return;
+    }
+
     const container = document.getElementById(containerId);
 
-    render(container, mergedOptions);
+    if (!container) {
+        throw new Error('check containerId');
+    }
+
+    initializedWidgetIds.push(containerId);
+
+    render(container, { ...getDefaultOptions(window), ...options });
 };
