@@ -1,5 +1,5 @@
-import { app } from './widget'
+import { app } from './widget';
 
 document.addEventListener('DOMContentLoaded', () => {
     app();
-})
+});
