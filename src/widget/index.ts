@@ -1,14 +1,16 @@
 import initDatePicker from './datepicker';
-import styles from './styles.module.css';
 import { i18n, Lang } from './i18n';
+
+import styles from './styles.module.css';
 
 type Size = 'xl' | 'l' | 'm' | 's';
 
-type Options = {
+export type Options = {
     lang?: Lang;
     textColor?: string;
     backgroundColor?: string;
     buttonColor?: string;
+    size?: Size;
 };
 
 const getDefaultOptions = (window: Window): Options => {
@@ -76,8 +78,8 @@ const getMarkup = (size: Size, lang: Lang = 'en', widgetClassname: string) => {
         `;
 };
 
-const setWidgetStyle = (widget: HTMLElement, styleOptions: Omit<Options, 'lang'>) => {
-    Object.keys(styleOptions).forEach((property) => {
+const setWidgetStyle = (widget: HTMLElement, styleOptions: Omit<Options, 'lang' | 'size'>) => {
+    Object.keys(styleOptions).forEach((property: keyof typeof styleOptions) => {
         const value = styleOptions[property];
 
         widget.style.setProperty(`--${property}`, value);
@@ -94,8 +96,8 @@ const renderDatePicker = (container: HTMLElement, lang?: Lang) => {
     }
 };
 
-const render = (container: HTMLElement, { lang, ...restOptions }: Options) => {
-    const containerSize = getContainerSize(container);
+const render = (container: HTMLElement, { lang, size, ...restOptions }: Options) => {
+    const containerSize = size || getContainerSize(container);
     const widgetClassname = `tp-widget-${Date.now()}`;
 
     container.innerHTML = getMarkup(containerSize, lang, widgetClassname);
@@ -109,25 +111,34 @@ const render = (container: HTMLElement, { lang, ...restOptions }: Options) => {
     }
 };
 
-const initializedWidgetIds: Array<string> = [];
-
-export const init = (containerId: string, options: Options = {}) => {
+const checkBeforeInit = (containerId: string, initializedWidgetIds: Array<string>) => {
     if (!containerId) {
         throw new Error('containerId required');
+    }
+
+    if (!document.getElementById(containerId)) {
+        throw new Error('check containerId');
     }
 
     if (initializedWidgetIds.includes(containerId)) {
         console.warn(`widget with id "${containerId}" already initialized`);
 
+        return false;
+    }
+
+    return true;
+};
+
+const initializedWidgetIds: Array<string> = [];
+
+export const init = (containerId: string, options: Options = {}) => {
+    const isCheckSuccess = checkBeforeInit(containerId, initializedWidgetIds);
+
+    if (!isCheckSuccess) {
         return;
     }
 
     const container = document.getElementById(containerId);
-
-    if (!container) {
-        throw new Error('check containerId');
-    }
-
     const mergedOptions = { ...getDefaultOptions(window), ...options };
 
     render(container, mergedOptions);

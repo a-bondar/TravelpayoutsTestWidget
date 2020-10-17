@@ -26,7 +26,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    {
+                        loader: 'style-loader',
+                        options: { injectType: 'singletonStyleTag' },
+                    },
                     {
                         loader: 'css-loader',
                         options: {
@@ -46,5 +49,4 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    mode: 'development',
 };

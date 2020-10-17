@@ -1,23 +1,25 @@
-import { init } from './widget';
+import { init, Options } from './widget';
 
 declare global {
     interface Window {
         tpGlobalWidgetInitName: string;
+        queue: Array<[string, Options?]>;
     }
 }
 
 const run = () => {
     const globalWidgetName = window.tpGlobalWidgetInitName;
 
-    // @ts-ignore
-    const { queue } = window[globalWidgetName];
+    if (window[globalWidgetName as any]) {
+        const { queue } = window[globalWidgetName as any];
 
-    if (queue && queue.length) {
-        queue.forEach((initArgs: Array<any>) => init(initArgs[0], initArgs[1]));
+        if (queue && queue.length) {
+            queue.forEach((initArgs) => init(...initArgs));
+        }
+
+        // @ts-ignore
+        window[globalWidgetName] = init;
     }
-
-    // @ts-ignore
-    window[globalWidgetName] = init;
 };
 
 const app = () => {

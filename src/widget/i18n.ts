@@ -8,8 +8,6 @@ type TextContent = {
     };
 };
 
-export type Lang = 'en' | 'ru';
-
 type i18n = {
     en: TextContent;
     ru: TextContent;
@@ -33,7 +31,9 @@ export const i18n: i18n = {
         button: 'Поиск',
         inputsPlaceholder: {
             from: '"Дата отправления"',
-            to: '"Дата возвращения"',
+            to: '"Дата прибытия"',
         },
     },
 };
+
+export type Lang = keyof typeof i18n;
