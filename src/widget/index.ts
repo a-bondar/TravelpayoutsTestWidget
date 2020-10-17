@@ -128,9 +128,10 @@ export const init = (containerId: string, options: Options = {}) => {
         throw new Error('check containerId');
     }
 
-    initializedWidgetIds.push(containerId);
     const mergedOptions = { ...getDefaultOptions(window), ...options };
 
     render(container, mergedOptions);
     renderDatePicker(container, mergedOptions.lang);
+
+    initializedWidgetIds.push(containerId);
 };
