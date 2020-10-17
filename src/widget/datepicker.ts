@@ -6,7 +6,8 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { Lang } from './i18n';
 
 export default (targetElement: HTMLElement, lang?: Lang) => {
-    const options = lang && lang === 'ru' ? { locale: Russian } : {};
+    const dateFormat = 'd.m.yy';
+    const localeOptions = lang && lang === 'ru' ? { locale: Russian } : {};
 
-    flatpickr(targetElement, options);
+    flatpickr(targetElement, { dateFormat, ...localeOptions });
 };
