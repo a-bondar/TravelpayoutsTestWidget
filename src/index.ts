@@ -21,7 +21,6 @@ const run = () => {
 };
 
 const app = () => {
-    debugger;
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', run);
     } else {
