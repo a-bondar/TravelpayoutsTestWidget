@@ -1,4 +1,5 @@
-import styles from './styles.css';
+import initDatePicker from './datepicker';
+import styles from './styles.module.css';
 import { i18n, Lang } from './i18n';
 
 type Size = 'xl' | 'l' | 'm' | 's';
@@ -53,13 +54,13 @@ const getMarkup = (size: Size, lang: Lang = 'en', widgetClassname: string) => {
                         <p class=${styles.subtitle}>${i18n[lang].subtitle}</p>
                         <form class=${styles.form} action="#">
                             <input
-                                class=${styles.input}
+                                class='${styles.input} datepicker-from'
                                 type="text"
                                 placeholder=${i18n[lang].inputsPlaceholder.from}
                                 required
                             >
-                            <input 
-                                class=${styles.input} 
+                            <input
+                                class='${styles.input} datepicker-to'
                                 type="text" 
                                 placeholder=${i18n[lang].inputsPlaceholder.to} 
                                 required
@@ -81,6 +82,16 @@ const setWidgetStyle = (widget: HTMLElement, styleOptions: Omit<Options, 'lang'>
 
         widget.style.setProperty(`--${property}`, value);
     });
+};
+
+const renderDatePicker = (container: HTMLElement, lang?: Lang) => {
+    const inputFrom = container.querySelector('.datepicker-from') as HTMLElement;
+    const inputTo = container.querySelector('.datepicker-to') as HTMLElement;
+
+    if (inputFrom && inputTo) {
+        initDatePicker(inputFrom, lang);
+        initDatePicker(inputTo, lang);
+    }
 };
 
 const render = (container: HTMLElement, { lang, ...restOptions }: Options) => {
@@ -118,6 +129,8 @@ export const init = (containerId: string, options: Options = {}) => {
     }
 
     initializedWidgetIds.push(containerId);
+    const mergedOptions = { ...getDefaultOptions(window), ...options };
 
-    render(container, { ...getDefaultOptions(window), ...options });
+    render(container, mergedOptions);
+    renderDatePicker(container, mergedOptions.lang);
 };

@@ -30,7 +30,8 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
+                            importLoaders: 1,
+                            modules: { auto: true },
                         },
                     },
                     'postcss-loader',

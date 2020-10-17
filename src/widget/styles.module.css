@@ -69,8 +69,12 @@
     border: 0;
     width: 26%;
     height: 40px;
-    background-color: #fff;
     border-radius: 2px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yIDcuOTk4cy4wMDIgNy4yNSAwIDcuMDAybDExLjAwMy0uMDAxYy0uMDAyIDAtLjAwNi03LS4wMDYtN0wyIDcuOTk4ek04IDExaDR2M0g4di0zem03LTV2OWEyIDIgMCAwMS0yIDJIMmEyIDIgMCAwMS0yLTJWNmgxNXptLTMtNFYxYTEgMSAwIDAwLTEtMWgtMWExIDEgMCAwMC0xIDF2MUg2VjFhMSAxIDAgMDAtMS0xSDRhMSAxIDAgMDAtMSAxdjFIMmEyIDIgMCAwMC0yIDJoMTVhMiAyIDAgMDAtMi0yaC0xeiIgZmlsbD0iIzQ5OTBFMiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+Cg==);
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    background-size: 15px 17px;
+    background-color: #fff;
 }
 .input:not(:last-of-type) {
     margin-right: 20px;
