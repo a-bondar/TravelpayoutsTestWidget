@@ -19,23 +19,41 @@
 
         firstScriptEl.parentNode.insertBefore(scriptEl, firstScriptEl);
       })();
-      ['XL', 'L', 'M', 'S'].forEach(function (size) {
-        return window.tpWidgetInit(`widget${size}`, { textColor: size === 'L' ?' red' : 'cyan' })
-      });
+
+      tpWidgetInit('widgetXL')
+      tpWidgetInit('widgetL', { textColor: 'black', backgroundColor: 'darkSeaGreen', buttonColor: 'darkCyan' })
+      tpWidgetInit('widgetM', { lang: 'ru', buttonColor: 'magenta' })
+      tpWidgetInit('widgetS', { lang: 'ru', buttonColor: '#48D1CC' })
     </script>
+    <style>
+      pre code {
+        background-color: #eee;
+        border: 1px solid #999;
+        display: block;
+        padding: 20px;
+      }
+      .center {
+        margin: 0 auto;
+      }
+      .container {
+        text-align: center;
+      }
+    </style>
   <meta name="viewport" content="width=device-width, initial-scale=1"></head>
   <body>
-    <h2>XL</h2>
-    <div id="widgetXL" style="max-width: 1024px"></div>
-    <br>
-    <h2>L</h2>
-    <div id="widgetL" style="max-width: 768px"></div>
-    <br>
-    <h2>M</h2>
-    <div id="widgetM" style="max-width: 440px"></div>
-    <br>
-    <h2>S</h2>
-    <div id="widgetS" style="max-width: 280px"></div>
-    <br>
+      <div class="container">
+        <h1>Примеры использования виджета</h1>
+        <h3>Виджет размера XL с настройками по умолчанию</h3>
+        <div class="center" id="widgetXL" style="max-width: 1024px"></div>
+        <br>
+        <h3>Виджет размера L. Пример инициализации: <pre><code>tpWidgetInit('widgetL', { textColor: 'black', backgroundColor: 'darkSeaGreen', buttonColor: 'darkCyan' })</code></pre></h3>
+        <div class="center" id="widgetL" style="max-width: 768px"></div>
+        <br>
+        <h3>Виджет размера M. Пример инициализации: <pre><code>tpWidgetInit('widgetM', { lang: 'ru', buttonColor: 'magenta' })</code></pre></h3>
+        <div class="center" id="widgetM" style="max-width: 440px"></div>
+        <br>
+        <h3>Виджет размера S. Пример инициализации: <pre><code>tpWidgetInit('widgetS', { lang: 'ru', buttonColor: '#48D1CC' })</code></pre></h3>
+        <div class="center" id="widgetS" style="max-width: 280px"></div>
+      </div>
   </body>
 </html>
