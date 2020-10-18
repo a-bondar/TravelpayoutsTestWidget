@@ -17,6 +17,12 @@
 .size_m.wrapper, .size_s.wrapper  {
     padding-top: 7px;
 }
+.size_m.wrapper {
+    max-width: 768px;
+}
+.size_s.wrapper {
+    max-width: 440px;
+}
 
 .title {
     all: initial;
@@ -68,6 +74,7 @@
 }
 .size_m .form {
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .size_s .form {
     flex-direction: column;
@@ -96,6 +103,7 @@
 }
 .size_m .input {
     width: 42%;
+    margin: 0;
 }
 .size_s .input {
     width: auto;
