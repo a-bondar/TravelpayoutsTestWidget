@@ -30,7 +30,7 @@ const getDefaultOptions = (window: Window): Options => {
     };
 };
 
-const getContainerSize = (container: HTMLElement): Size => {
+const getWidgetSize = (container: HTMLElement): Size => {
     const width = container.offsetWidth;
 
     if (width < 440) {
@@ -48,9 +48,9 @@ const getContainerSize = (container: HTMLElement): Size => {
     return 'xl';
 };
 
-const getMarkup = (size: Size, lang: Lang = 'en', widgetClassname: string) => {
+const getMarkup = (size: Size, lang: Lang = 'en') => {
     return `
-            <div class='${styles.wrapper} ${styles[`size_${size}`]} ${widgetClassname}'>
+            <div class='${styles.wrapper} ${styles[`size_${size}`]}'>
                 <h3 class=${styles.title}>${i18n[lang].title}</h3>
                    <div class=${styles['form-wrapper']}>
                         <p class=${styles.subtitle}>${i18n[lang].subtitle}</p>
@@ -97,13 +97,12 @@ const renderDatePicker = (container: HTMLElement, lang?: Lang) => {
 };
 
 const render = (container: HTMLElement, { lang, size, ...restOptions }: Options) => {
-    const containerSize = size || getContainerSize(container);
-    const widgetClassname = `tp-widget-${Date.now()}`;
+    const containerSize = size || getWidgetSize(container);
 
-    container.innerHTML = getMarkup(containerSize, lang, widgetClassname);
+    container.innerHTML = getMarkup(containerSize, lang);
 
     if (Object.keys(restOptions).length !== 0) {
-        const widgetColl = container.getElementsByClassName(widgetClassname) as HTMLCollectionOf<HTMLElement>;
+        const widgetColl = container.getElementsByClassName(styles.wrapper) as HTMLCollectionOf<HTMLElement>;
 
         if (widgetColl.length && widgetColl[0]) {
             setWidgetStyle(widgetColl[0], restOptions);
